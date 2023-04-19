@@ -23,13 +23,13 @@ Install MongoDB and Express. Open terminal and run npm start.
 
 
 ## ScreenShots
-[](./images/ScreenShot1.png)
-[](./images/ScreenShot2.png)
+![](./images/ScreenShot1.png)
+![](./images/ScreenShot2.png)
 
 
 ## Walkthrough
 
-![Vimeo Walkthrough](https://vimeo.com/819037998?share=copy)
+[Vimeo Walkthrough](https://vimeo.com/819037998?share=copy)
 
 
 ## Questions
