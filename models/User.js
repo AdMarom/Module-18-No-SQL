@@ -5,28 +5,42 @@ const userSchema = new Schema (
     {
         username: {
             type: String,
-            //TODO unique
+            unique: true,
             required: true,
-            //TODO trimmed
+            trim: true
         },
         email: {
             type: String,
             required: true,
-            //TODO unique
-            //TODO Must match a valid email address (look into Mongoose's matching validation)
+            unique: true,
+            match: /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/
         },
         thoughts: {
-            //TODO Array of _id values referencing the Thought model
+            type: Schema.Types.ObjectId,
+            ref: 'Thought'
         },
-        friends: {
-            //TODO Array of _id values referencing the User model (self-reference)
-        }
-    }
+        friends: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'User'
+            }
+        ],
+    },
+    {
+        // Mongoose supports two Schema options to transform Objects after querying MongoDb: toJSON and toObject.
+        // Here we are indicating that we want virtuals to be included with our response, overriding the default behavior
+        toJSON: {
+          virtuals: true,
+        },
+        id: false,
+      }
+);
 
-)
-
-//TODO Schema Settings - Create a virtual called friendCount that retrieves the length of the user's friends array field on query.
-
+userSchema
+.virtual('friendCount')
+.get(function () {
+    return this.friends.length;
+  });
 
 const User = model('user', userSchema);
 
